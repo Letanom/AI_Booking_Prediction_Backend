@@ -5,20 +5,20 @@ import pandas as pd
 import numpy as np
 from fastapi.middleware.cors import CORSMiddleware
 
-# FastAPI application
+
 app = FastAPI()
 
-# CORS configuration (adjust origins as needed)
+# CORS config
 origins = ["http://localhost:3000"]
 app.add_middleware(
     CORSMiddleware, allow_origins=origins, allow_credentials=True,
     allow_methods=["*"], allow_headers=["*"]
 )
 
-# User data class (model)
+# User data class
 class UserData(BaseModel):
     Age: int
-    Income: float  # Assuming income is a continuous value
+    Income: float  
     FamilySize: int
     HotelStar: int
     TravelFrequency: int
@@ -35,16 +35,10 @@ except FileNotFoundError:
         status_code=500, detail="Model file 'model.pkl' not found. Please ensure it exists."
     )
 
-# Prediction function
+
 def predict_booking(data: UserData):
-    """Predicts booking status based on user data.
 
-    Args:
-        data (UserData): User data object.
-
-    Returns:
-        dict: Dictionary containing the predicted booking status.
-    """
+  
     # Convert the input data to a pandas DataFrame
     input_data = pd.DataFrame([data.dict()])
 
@@ -66,20 +60,13 @@ def predict_booking(data: UserData):
     # Return the prediction
     return {"BookingStatus": prediction}
 
-# API route
+#API endpoint
 @app.post("/predict")
 def predict(data: UserData):
-    """Predicts booking status based on user data received in a POST request.
-
-    Args:
-        data (UserData): User data object in the request body.
-
-    Returns:
-        dict: Dictionary containing the predicted booking status.
-    """
+  
     return predict_booking(data)
 
-# Test the API (optional)
+# Test the API
 @app.get("/")
 def read_root():
     return {"message": "Booking prediction API is running!"}

@@ -1,7 +1,7 @@
 # Python 3.13 slim-based
 FROM python:3.13-slim
 
-WORKDIR ./ai-booking
+WORKDIR /ai-booking
 
 
 # Copy the requirements.txt file first

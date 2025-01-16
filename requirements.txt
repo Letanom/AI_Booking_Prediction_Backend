@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+joblib
+sqlalchemy
+pydantic
+pandas
+aiohttp 
+requests 
+python-dotenv 
+gunicorn  
+scikit-learn
